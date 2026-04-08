@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Playing XI</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🏏 AI Playing XI Dashboard</h1>
+
+    <div class="form-group">
+        <label>Announced Squad</label>
+        <textarea id="players"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Venue</label>
+        <input id="venue">
+    </div>
+
+    <div class="form-group">
+        <label>Opponent</label>
+        <input id="opponent">
+    </div>
+
+    <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+            <option>Men</option>
+            <option>Women</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Pitch Type</label>
+        <select id="pitch">
+            <option>Flat</option>
+            <option>Spin</option>
+            <option>Pace</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Captain</label>
+        <input id="captain">
+    </div>
+
+    <div class="form-group">
+        <label>Vice Captain</label>
+        <input id="vice_captain">
+    </div>
+
+    <button id="predictBtn">🚀 Predict XI</button>
+
+    <div id="output"></div>
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>

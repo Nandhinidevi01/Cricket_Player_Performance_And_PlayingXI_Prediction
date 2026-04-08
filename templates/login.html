@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Cricket Predictor - Login</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #1e1e1e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 350px; text-align: center; border-top: 5px solid #00d2ff; }
+        h2 { margin-bottom: 25px; color: #00d2ff; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; background: #2c2c2c; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; margin-top: 20px; border: none; border-radius: 5px; background: linear-gradient(to right, #00d2ff, #3a7bd5); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        .footer-links { margin-top: 20px; font-size: 0.9em; }
+        a { color: #00d2ff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>🏏 Cricket AI Login</h2>
+        <form method="POST" action="/login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">LOGIN</button>
+        </form>
+        <div class="footer-links">
+            Don't have an account? <a href="/signup">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>
