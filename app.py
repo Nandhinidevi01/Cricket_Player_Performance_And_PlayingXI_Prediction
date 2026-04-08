@@ -35,8 +35,8 @@ MODEL_PATH = os.path.join(BASE_DIR, "models")
 # ================= LOAD DATA =================
 try:
     career_df = pd.read_csv(os.path.join(BASE_DIR, "data/career/player_career_stats_t20.csv"))
+    career_df.fillna("Unknown", inplace=True) 
     career_df["player"] = career_df["player"].astype(str).str.lower().str.strip()
-    career_df.fillna(0, inplace=True)
     print("✅ Data Loaded")
 except Exception as e:
     print(f"❌ Data Load Error: {e}")
