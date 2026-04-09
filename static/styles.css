@@ -1,149 +1,77 @@
-:root {
-    --primary: #00d2ff;
-    --secondary: #3a7bd5;
-    --background: #05050a;
-    --card-bg: rgba(26, 26, 41, 0.85);
-    --text: #f0f0f0;
-    --bat-glow: rgba(0, 210, 255, 0.6);
-    --bowl-glow: rgba(255, 65, 108, 0.6);
-    --ar-glow: rgba(58, 123, 213, 0.6);
-    --wk-glow: rgba(255, 221, 0, 0.6);
-}
-
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--background);
-    background-image: 
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), 
-        url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2000&auto=format&fit=crop'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    backdrop-filter: blur(1px);
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
+    width: 40%;
+    margin: auto;
     text-align: center;
 }
 
-h1 {
-    font-weight: 700;
-    font-size: 2.8em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 50px;
-    background: linear-gradient(to right, #ffffff, var(--primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+.form-group {
+    margin: 15px 0;
 }
 
-.input-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 40px;
-    margin-bottom: 50px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-}
-
-.input-row {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
-}
-
-.input-group {
-    flex: 1 1 200px;
-    margin: 10px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-}
-
-input[type="text"], select, textarea {
+textarea, input, select {
     width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text);
-    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
 }
 
 button {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #000;
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background: #22c55e;
     border: none;
-    padding: 18px 45px;
-    border-radius: 12px;
-    font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 210, 255, 0.25);
+    font-size: 16px;
+    transition: 0.3s;
 }
 
-/* Card Glows */
-.player-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 25px;
-    position: relative;
-    border: 2px solid transparent;
-    transition: transform 0.3s;
+button:hover {
+    transform: scale(1.05);
+    background: #16a34a;
 }
 
-.bat-glow { border-color: #00d2ff; box-shadow: 0 0 20px var(--bat-glow); }
-.bowl-glow { border-color: #ff416c; box-shadow: 0 0 20px var(--bowl-glow); }
-.ar-glow { border-color: #3a7bd5; box-shadow: 0 0 20px var(--ar-glow); }
-.wk-glow { border-color: #ffdd00; box-shadow: 0 0 20px var(--wk-glow); }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
 
-.captain-badge {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background: #ffdd00;
-    color: #000;
+.card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.badge {
     padding: 5px 10px;
-    border-radius: 50%;
-    font-weight: bold;
+    margin: 5px;
+    display: inline-block;
 }
 
-#loader {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid var(--primary);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
+.captain {
+    background: gold;
 }
 
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+.vc {
+    background: silver;
 }
