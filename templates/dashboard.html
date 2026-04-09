@@ -1,119 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Playing XI Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>AI Playing XI</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
 
 <div class="container">
-    <h1>🏏 AI Cricket Playing XI Predictor</h1>
+    <h1>🏏 AI Playing XI Dashboard</h1>
 
-    <div class="input-card">
-        <div class="input-row">
-            <div class="input-group">
-                <label>Venue</label>
-                <input type="text" id="venue" placeholder="Stadium Name">
-            </div>
-            <div class="input-group">
-                <label>Opponent</label>
-                <input type="text" id="opponent" placeholder="Opposing Team">
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label>Announced Squad (Comma Separated)</label>
-            <textarea id="squad" placeholder="Virat Kohli, Rohit Sharma..."></textarea>
-        </div>
-
-        <div class="input-row">
-            <div class="input-group">
-                <label>Captain</label>
-                <input type="text" id="captain" placeholder="Captain Name">
-            </div>
-            <div class="input-group">
-                <label>Vice Captain</label>
-                <input type="text" id="vice_captain" placeholder="VC Name">
-            </div>
-        </div>
-
-        <button onclick="predictXI()">⚡ Predict XI</button>
-        <p id="error-msg" style="color: #ff416c; margin-top: 15px;"></p>
+    <div class="form-group">
+        <label>Announced Squad</label>
+        <textarea id="players"></textarea>
     </div>
 
-    <div id="result-container" style="display: none;">
-        <h2 style="color: white; margin-bottom: 30px;">AI Predicted Playing XI</h2>
-        <div id="players-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
-            </div>
+    <div class="form-group">
+        <label>Venue</label>
+        <input id="venue">
     </div>
+
+    <div class="form-group">
+        <label>Opponent</label>
+        <input id="opponent">
+    </div>
+
+    <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+            <option>Men</option>
+            <option>Women</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Pitch Type</label>
+        <select id="pitch">
+            <option>Flat</option>
+            <option>Spin</option>
+            <option>Pace</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Captain</label>
+        <input id="captain">
+    </div>
+
+    <div class="form-group">
+        <label>Vice Captain</label>
+        <input id="vice_captain">
+    </div>
+
+    <button id="predictBtn">🚀 Predict XI</button>
+
+    <div id="output"></div>
 </div>
 
-<div id="loader"></div>
+<script src="/static/script.js"></script>
 
-<script>
-    async function predictXI() {
-        const loader = document.getElementById("loader");
-        const resContainer = document.getElementById("result-container");
-        const errorMsg = document.getElementById("error-msg");
-
-        loader.style.display = "block";
-        errorMsg.innerText = "";
-        resContainer.style.display = "none";
-
-        const payload = {
-            players: document.getElementById("squad").value,
-            captain: document.getElementById("captain").value,
-            vice_captain: document.getElementById("vice_captain").value
-        };
-
-        try {
-            const response = await fetch("/predict", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await response.json();
-            loader.style.display = "none";
-
-            if (data.error) {
-                errorMsg.innerText = "❌ " + data.error;
-            } else {
-                resContainer.style.display = "block";
-                displayPlayers(data.players);
-            }
-        } catch (e) {
-            loader.style.display = "none";
-            errorMsg.innerText = "Something went wrong.";
-        }
-    }
-
-    function displayPlayers(players) {
-        const grid = document.getElementById("players-grid");
-        grid.innerHTML = "";
-        
-        const glowMap = { 'BATSMAN': 'bat-glow', 'BOWLER': 'bowl-glow', 'ALLROUNDER': 'ar-glow', 'WICKETKEEPER': 'wk-glow' };
-
-        players.forEach(p => {
-            const card = document.createElement("div");
-            card.className = `player-card ${glowMap[p.role] || ''}`;
-            
-            let capTag = p.captain ? '<div class="captain-badge">C</div>' : (p.vice_captain ? '<div class="captain-badge" style="background:rgba(255,221,0,0.6)">VC</div>' : '');
-
-            card.innerHTML = `
-                ${capTag}
-                <div style="font-weight:bold; font-size:1.2em; margin-bottom:10px;">${p.name}</div>
-                <div style="font-size:0.8em; opacity:0.8; margin-bottom:15px;">${p.role}</div>
-                <div style="font-size:0.9em;">Runs: ${p.runs}</div>
-                ${p.wickets > 0 ? `<div style="font-size:0.9em;">Wickets: ${p.wickets}</div>` : ''}
-                <div style="color:var(--primary); font-weight:bold; margin-top:10px;">${p.confidence}% AI Confidence</div>
-            `;
-            grid.appendChild(card);
-        });
-    }
-</script>
 </body>
 </html>
