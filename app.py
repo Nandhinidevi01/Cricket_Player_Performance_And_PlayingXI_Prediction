@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # ================= AUTH CONFIG =================
 app.config['SECRET_KEY'] = 'nandhu_secret_key_123' 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(os.getcwd(), 'users.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -28,13 +28,13 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # ================= PATH =================
-# Note: Intha path unga system-la correct-ah irukanu check pannikonga
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.getcwd()
 MODEL_PATH = os.path.join(BASE_DIR, "models")
 
 # ================= LOAD DATA =================
 try:
-    career_df = pd.read_csv(os.path.join(BASE_DIR, "data/career/player_career_stats_t20.csv"))
+    data_file = os.path.join(BASE_DIR, "data", "career", "player_career_stats_t20.csv")
+    career_df = pd.read_csv(data_file)
     career_df.fillna("Unknown", inplace=True) 
     career_df["player"] = career_df["player"].astype(str).str.lower().str.strip()
     print("✅ Data Loaded")
